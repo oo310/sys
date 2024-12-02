@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>程式邏輯練習</title>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .exercise-header {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .question-title {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .question-description {
+            color: #34495e;
+            margin-bottom: 1.5rem;
+        }
+        
+        .container {
+            margin-top: 2rem;
+        }
+        
+        .zone {
+            min-height: 150px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .block {
+            background: #e9ecef;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+            cursor: move;
+            user-select: none;
+            touch-action: none;
+        }
+        
+        .block:hover {
+            background: #dee2e6;
+        }
+        
+        #answer-zone {
+            background-color: #e9f7ef;
+        }
+        
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+      <a href="index.html">首頁</a>
+      <a href="exercise.html">練習</a>
+      <a href="list.html">題目列表</a>
+    </nav>
+    <div class="exercise-header">
+        <h1 class="question-title">程式邏輯練習</h1>
+        <div class="question-description">
+            <p><strong>題目說明：</strong></p>
+            <p>這是一個計算 1 到 5 總和的程式。請將下方程式碼區塊依照正確的執行順序拖曳到作答區中。</p>
+            <p><strong>預期結果：</strong></p>
+            <ul>
+                <li>程式會計算 1+2+3+4+5 的總和</li>
+                <li>最後印出結果 15</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>作答區</h2>
+        <div id="answer-zone" class="zone">
+            <div class="block" draggable="true" data-code="1">
+                1. sum = 0
+            </div>
+            <div class="block" draggable="true" data-code="2">
+                2. for i in range(1, 6):
+            </div>
+            <div class="block" draggable="true" data-code="3">
+                3. sum = sum + i
+            </div>
+            <div class="block" draggable="true" data-code="4">
+                4. print(sum)
+            </div>
+        </div>
+
+        </div>
+
+        <button id="submit">送出答案</button>
+        <div id="result"></div>
+    </div>
+</body>
+
+<script>
+    // 初始化拖曳
+    interact('.block').draggable({
+      listeners: {
+        move(event) {
+          const target = event.target;
+  
+          // 計算拖曳後的位置
+          const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+          const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+  
+          // 更新元素位置
+          target.style.transform = `translate(${x}px, ${y}px)`;
+          target.setAttribute('data-x', x);
+          target.setAttribute('data-y', y);
+        },
+        end(event) {
+          // 重置位置數據
+          const target = event.target;
+          target.style.transform = '';
+          target.removeAttribute('data-x');
+          target.removeAttribute('data-y');
+        }
+      }
+    });
+  
+    // 初始化放置區
+    interact('.zone').dropzone({
+      ondragenter(event) {
+        const zone = event.target;
+        zone.classList.add('hover');
+      },
+      ondragleave(event) {
+        const zone = event.target;
+        zone.classList.remove('hover');
+      },
+      ondrop(event) {
+        const draggedBlock = event.relatedTarget; // 被拖曳的積木
+        const dropZone = event.target; // 目標放置區
+  
+        dropZone.classList.remove('hover');
+  
+        // 判斷拖曳目標的垂直位置
+        const dropZoneBlocks = Array.from(dropZone.querySelectorAll('.block'));
+        const draggedRect = draggedBlock.getBoundingClientRect();
+  
+        let inserted = false;
+  
+        for (const block of dropZoneBlocks) {
+          const blockRect = block.getBoundingClientRect();
+  
+          // 如果被拖曳物件在目標物件上方，插入到該物件前面
+          if (draggedRect.top < blockRect.top) {
+            dropZone.insertBefore(draggedBlock, block);
+            inserted = true;
+            break;
+          }
+        }
+  
+        // 如果未插入，放置到目標區域的最後
+        if (!inserted) {
+          dropZone.appendChild(draggedBlock);
+        }
+  
+        console.log(`${draggedBlock.id} 被放入 ${dropZone.id}`);
+      },
+      ondropdeactivate(event) {
+        event.target.classList.remove('hover');
+      }
+    });
+</script>
+
+<script>
+  // Submit button logic
+  document.getElementById('submit').addEventListener('click', () => {
+    const answerZone = document.getElementById('answer-zone');
+    const blocks = answerZone.querySelectorAll('.block');
+    const correctOrder = ['1', '2', '3', '4']; // Correct order of blocks
+    const userOrder = Array.from(blocks).map(block => block.dataset.code);
+
+    const result = document.getElementById('result');
+    if (JSON.stringify(userOrder) === JSON.stringify(correctOrder)) {
+      result.textContent = '答案正確！';
+      result.style.color = 'green';
+    } else {
+      result.textContent = '答案錯誤，請再試一次。';
+      result.style.color = 'red';
+    }
+  });
+</script>
+
+</html>
