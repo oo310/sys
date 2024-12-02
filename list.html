@@ -3,13 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>首頁</title>
+    <style>
+        body {
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+    </style>
 </head>
 <body>
-    <nav>
-        <a href="index.html">首頁</a>
-        <a href="exercise.html">練習</a>
-        <a href="list.html">題目列表</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <!-- 網站名稱 -->
+            <a class="navbar-brand" href="#">我的網站</a>
+            <!-- 漢堡按鈕 -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="切換導航">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- 導覽列內容 -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">首頁</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="exercise.html">練習</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="list.html">題目列表</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
     <h1>題目列表！</h1>
     <p>!!!</p>

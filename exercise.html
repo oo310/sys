@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>程式邏輯練習</title>
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/exercise.css">
     <style>
         body {
             font-family: Arial, "Microsoft JhengHei", sans-serif;
@@ -13,74 +15,35 @@
             padding: 20px;
             line-height: 1.6;
         }
-        
-        .exercise-header {
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-        }
-        
-        .question-title {
-            color: #2c3e50;
-            margin-bottom: 1rem;
-        }
-        
-        .question-description {
-            color: #34495e;
-            margin-bottom: 1.5rem;
-        }
-        
-        .container {
-            margin-top: 2rem;
-        }
-        
-        .zone {
-            min-height: 150px;
-            border: 2px dashed #ccc;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-        
-        .block {
-            background: #e9ecef;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border-radius: 4px;
-            cursor: move;
-            user-select: none;
-            touch-action: none;
-        }
-        
-        .block:hover {
-            background: #dee2e6;
-        }
-        
-        #answer-zone {
-            background-color: #e9f7ef;
-        }
-        
-        button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        button:hover {
-            background-color: #0056b3;
-        }
+
     </style>
 </head>
 <body>
-    <nav>
-      <a href="index.html">首頁</a>
-      <a href="exercise.html">練習</a>
-      <a href="list.html">題目列表</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <!-- 網站名稱 -->
+            <a class="navbar-brand" href="#">我的網站</a>
+            <!-- 漢堡按鈕 -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="切換導航">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- 導覽列內容 -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">首頁</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="exercise.html">練習</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="list.html">題目列表</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
+
     <div class="exercise-header">
         <h1 class="question-title">程式邏輯練習</h1>
         <div class="question-description">
@@ -94,9 +57,9 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="answer-header">
         <h2>作答區</h2>
-        <div id="answer-zone" class="zone">
+        <div class="zone">
             <div class="block" draggable="true" data-code="1">
                 1. sum = 0
             </div>
