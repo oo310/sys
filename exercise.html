@@ -10,8 +10,8 @@
     <style>
         body {
             font-family: Arial, "Microsoft JhengHei", sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 1000px;
+            margin: 0 auto  ;
             padding: 20px;
             line-height: 1.6;
         }
@@ -22,7 +22,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <!-- 網站名稱 -->
-            <a class="navbar-brand" href="#">我的網站</a>
+            <a class="navbar-brand" href="#">練習</a>
             <!-- 漢堡按鈕 -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="切換導航">
                 <span class="navbar-toggler-icon"></span>
@@ -34,10 +34,10 @@
                         <a class="nav-link active" href="index.html">首頁</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="exercise.html">練習</a>
+                        <a class="nav-link" href="list.html">教材列表</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="list.html">題目列表</a>
+                      <a class="nav-link" href="ex_list.html">題目列表</a>
                     </li>
                 </ul>
             </div>
@@ -59,7 +59,7 @@
 
     <div class="answer-header">
         <h2>作答區</h2>
-        <div class="zone">
+        <div id="answer-zone" class="zone">
             <div class="block" draggable="true" data-code="1">
                 1. sum = 0
             </div>
@@ -74,11 +74,11 @@
             </div>
         </div>
 
-        </div>
+      </div>
 
-        <button id="submit">送出答案</button>
-        <div id="result"></div>
-    </div>
+      <button id="submit">送出答案</button>
+      <div id="result" class="mb-5"></div>
+    
 </body>
 
 <script>
